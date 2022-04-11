@@ -4,8 +4,8 @@ namespace MinimalMvvm.ViewModels.Commands
 {
     public class RelayCommand : CommandBase
     {
-        private readonly Action _execute;
-        private readonly Func<bool>? _canExecute;
+        private readonly Action<object?> _execute;
+        private readonly Func<object?, bool>? _canExecute;
 
         private bool _isRunning;
 
@@ -31,7 +31,7 @@ namespace MinimalMvvm.ViewModels.Commands
             if (_isRunning)
                 return false;
             
-            return _canExecute?.Invoke() ?? true;
+            return _canExecute?.Invoke(parameter) ?? true;
         }
 
         public override void Execute(object? parameter)
@@ -39,7 +39,7 @@ namespace MinimalMvvm.ViewModels.Commands
             IsRunning = true;
             try
             {
-                _execute();
+                _execute(parameter);
             }
             catch (Exception e)
             {
