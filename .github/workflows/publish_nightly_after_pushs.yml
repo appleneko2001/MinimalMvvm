@@ -16,9 +16,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./src/MinimalMvvm
     - name: Build
-      run: dotnet build --no-restore --configuration Release ./src/MinimalMvvm/MinimalMvvm.csproj
+      run: dotnet build --no-restore --configuration Release ./src/MinimalMvvm/Appleneko2001.MinimalMvvm.csproj
     - name: Pack
-      run: dotnet pack --configuration Release -p:PatchNumber=$GITHUB_RUN_NUMBER-alpha ./src/MinimalMvvm/MinimalMvvm.csproj
+      run: dotnet pack --configuration Release -p:PatchNumber=$GITHUB_RUN_NUMBER-alpha ./src/MinimalMvvm/Appleneko2001.MinimalMvvm.csproj
     - name: Move package to artifacts
       run: |
         mkdir artifacts
@@ -29,5 +29,5 @@ jobs:
         name: artifacts
         path: artifacts/
     - name: Publish to NuGet
-      run: dotnet nuget push "artifacts/MinimalMvvm.*.nupkg" --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push "artifacts/Appleneko2001.MinimalMvvm.*.nupkg" --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
