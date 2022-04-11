@@ -5,8 +5,18 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
 
+        <VersionPrefix>0.10.0</VersionPrefix>
+
         <Title>Minimal MVVM toolkit</Title>
         <Authors>github@appleneko2001</Authors>
+        <PackageProjectUrl>https://github.com/appleneko2001/MinimalMvvm</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/appleneko2001/MinimalMvvm/blob/development-branch/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/appleneko2001/MinimalMvvm</RepositoryUrl>
+    </PropertyGroup>
+
+    <!-- For nightly versions -->
+    <PropertyGroup>
+        <Version Condition="'$(PatchNumber)' != ''">$(VersionPrefix).$(PatchNumber)</Version>
     </PropertyGroup>
 
 </Project>
