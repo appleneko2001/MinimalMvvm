@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalMvvm", "MinimalMvvm\MinimalMvvm.csproj", "{BCF3F03B-17DC-44CB-9A60-E5BA17F86AD1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appleneko2001.MinimalMvvm", "Appleneko2001.MinimalMvvm\Appleneko2001.MinimalMvvm.csproj", "{BCF3F03B-17DC-44CB-9A60-E5BA17F86AD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

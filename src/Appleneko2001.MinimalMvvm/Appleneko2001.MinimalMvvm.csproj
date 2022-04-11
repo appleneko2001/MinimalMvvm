@@ -12,6 +12,7 @@
         <PackageProjectUrl>https://github.com/appleneko2001/MinimalMvvm</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/appleneko2001/MinimalMvvm/blob/development-branch/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/appleneko2001/MinimalMvvm</RepositoryUrl>
+        <RootNamespace>MinimalMvvm</RootNamespace>
     </PropertyGroup>
 
     <!-- For nightly versions -->
