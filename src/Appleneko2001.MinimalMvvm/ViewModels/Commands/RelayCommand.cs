@@ -1,4 +1,5 @@
 ﻿using System;
+using MinimalMvvm.Events;
 
 namespace MinimalMvvm.ViewModels.Commands
 {
@@ -43,10 +44,10 @@ namespace MinimalMvvm.ViewModels.Commands
             }
             catch (Exception e)
             {
-                var args = new UnhandledExceptionEventArgs(e, false);
+                var args = new ExecutionFailExceptionArgs(e);
                 OnExecutionFailException(args);
 
-                if (args.IsTerminating)
+                if (!args.Handled)
                     throw;
             }
 

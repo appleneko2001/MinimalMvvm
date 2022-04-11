@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Windows.Input;
+using MinimalMvvm.Events;
 
 namespace MinimalMvvm.ViewModels.Commands
 {
     public class CommandBase : ViewModelBase, ICommand
     {
-        private static event EventHandler<UnhandledExceptionEventArgs>? _onErrorOccur;
+        private static event EventHandler<ExecutionFailExceptionArgs>? _onErrorOccur;
         
-        public static event EventHandler<UnhandledExceptionEventArgs>? OnErrorHandler
+        public static event EventHandler<ExecutionFailExceptionArgs>? OnErrorHandler
         {
             add => _onErrorOccur += value;
             remove => _onErrorOccur -= value;
@@ -30,7 +31,7 @@ namespace MinimalMvvm.ViewModels.Commands
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
         
-        protected void OnExecutionFailException(UnhandledExceptionEventArgs args)
+        protected void OnExecutionFailException(ExecutionFailExceptionArgs args)
         {
             _onErrorOccur?.Invoke(this, args);
         }
