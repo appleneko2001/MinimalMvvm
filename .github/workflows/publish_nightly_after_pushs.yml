@@ -14,11 +14,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore ./src/MinimalMvvm
+      run: dotnet restore ./src/Appleneko2001.MinimalMvvm
     - name: Build
-      run: dotnet build --no-restore --configuration Release ./src/MinimalMvvm/Appleneko2001.MinimalMvvm.csproj
+      run: dotnet build --no-restore --configuration Release ./src/Appleneko2001.MinimalMvvm/Appleneko2001.MinimalMvvm.csproj
     - name: Pack
-      run: dotnet pack --configuration Release -p:PatchNumber=$GITHUB_RUN_NUMBER-alpha ./src/MinimalMvvm/Appleneko2001.MinimalMvvm.csproj
+      run: dotnet pack --configuration Release -p:PatchNumber=$GITHUB_RUN_NUMBER-alpha ./src/Appleneko2001.MinimalMvvm/Appleneko2001.MinimalMvvm.csproj
     - name: Move package to artifacts
       run: |
         mkdir artifacts
