@@ -8,7 +8,6 @@ namespace MinimalMvvm.ViewModels.Commands
         private readonly Func<bool>? _canExecute;
 
         private bool _isRunning;
-        private event UnhandledExceptionEventHandler? _onErrorHandler;
 
         public bool IsRunning
         {
@@ -20,14 +19,8 @@ namespace MinimalMvvm.ViewModels.Commands
                 RaiseCanExecuteChanged();
             }
         }
-        
-        public event UnhandledExceptionEventHandler? OnErrorHandler
-        {
-            add => _onErrorHandler += value;
-            remove => _onErrorHandler -= value;
-        }
-        
-        public RelayCommand(Action execute, Func<bool>? canExecute = null)
+
+        public RelayCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -51,7 +44,7 @@ namespace MinimalMvvm.ViewModels.Commands
             catch (Exception e)
             {
                 var args = new UnhandledExceptionEventArgs(e, false);
-                _onErrorHandler?.Invoke(this, args);
+                OnExecutionFailException(args);
 
                 if (args.IsTerminating)
                     throw;
