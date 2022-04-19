@@ -33,5 +33,8 @@ namespace MinimalMvvm.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        internal void RaisePropertyChangedInternal([CallerMemberName] string? propertyName = null) =>
+            OnPropertyChanged(propertyName);
     }
 }
