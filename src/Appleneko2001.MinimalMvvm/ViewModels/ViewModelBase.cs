@@ -7,7 +7,7 @@ namespace MinimalMvvm.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
-        private static object _messengerCreationLock = new object();
+        private static readonly object MessengerCreationLock = new ();
         private static IMessenger? _messenger;
         
         public static void SetMessenger(IMessenger messenger)
@@ -22,7 +22,7 @@ namespace MinimalMvvm.ViewModels
                 if (_messenger != null)
                     return _messenger;
                 
-                lock (_messengerCreationLock)
+                lock (MessengerCreationLock)
                     return _messenger = new Messenger();
             }
         }
