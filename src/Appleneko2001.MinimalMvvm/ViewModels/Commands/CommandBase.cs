@@ -6,12 +6,12 @@ namespace MinimalMvvm.ViewModels.Commands
 {
     public class CommandBase : ViewModelBase, ICommand
     {
-        private static event EventHandler<ExecutionFailExceptionArgs>? _onErrorOccur;
+        private static event EventHandler<ExecutionFailExceptionArgs>? _onErrorEvent;
         
         public static event EventHandler<ExecutionFailExceptionArgs>? OnErrorHandler
         {
-            add => _onErrorOccur += value;
-            remove => _onErrorOccur -= value;
+            add => _onErrorEvent += value;
+            remove => _onErrorEvent -= value;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -33,7 +33,7 @@ namespace MinimalMvvm.ViewModels.Commands
         
         protected void OnExecutionFailException(ExecutionFailExceptionArgs args)
         {
-            _onErrorOccur?.Invoke(this, args);
+            _onErrorEvent?.Invoke(this, args);
         }
     }
 }
