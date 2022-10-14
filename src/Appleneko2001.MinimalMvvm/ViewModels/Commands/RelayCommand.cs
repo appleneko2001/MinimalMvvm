@@ -1,25 +1,28 @@
 ﻿using System;
-using MinimalMvvm.Events;
 
 namespace MinimalMvvm.ViewModels.Commands
 {
-    public class RelayCommand : CommandBase
+    public class RelayCommand : TryCommandBase
     {
-        private readonly Action<object?> _execute;
-        private readonly Func<object?, bool>? _canExecute;
-
-        private bool _isRunning;
-
         public bool IsRunning
         {
             get => _isRunning;
-            private set
+            protected set
             {
                 _isRunning = value;
                 OnPropertyChanged();
                 RaiseCanExecuteChanged();
             }
         }
+
+        protected Action<object?> OnExecuteInternal => _execute;
+        protected Func<object?, bool>? CanExecuteInternal => _canExecute;
+
+        private readonly Action<object?> _execute;
+        private readonly Func<object?, bool>? _canExecute;
+
+        private bool _isRunning;
+
 
         public RelayCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
         {
@@ -38,20 +41,13 @@ namespace MinimalMvvm.ViewModels.Commands
         public override void Execute(object? parameter)
         {
             IsRunning = true;
-            try
-            {
-                _execute(parameter);
-            }
-            catch (Exception e)
-            {
-                var args = new ExecutionFailExceptionArgs(e);
-                OnExecutionFailException(args);
-
-                if (!args.Handled)
-                    throw;
-            }
-
+            OnExecuteProcedure(parameter);
             IsRunning = false;
+        }
+
+        protected override void OnTryExecute(object? p)
+        {
+            _execute(p);
         }
     }
 }

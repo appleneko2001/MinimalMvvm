@@ -35,5 +35,13 @@ namespace MinimalMvvm.ViewModels.Commands
         {
             _onErrorEvent?.Invoke(this, args);
         }
+
+        protected bool DispatchErrorEventInternal(object? sender, Exception e)
+        {
+            var eventArgs = new ExecutionFailExceptionArgs(e);
+            _onErrorEvent?.Invoke(sender, eventArgs);
+
+            return eventArgs.Handled;
+        }
     }
 }
