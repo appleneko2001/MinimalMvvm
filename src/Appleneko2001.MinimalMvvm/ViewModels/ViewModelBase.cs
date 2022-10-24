@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using MinimalMvvm.ViewModels.Messengers;
 using MinimalMvvm.ViewModels.Messengers.Interfaces;
@@ -28,10 +29,17 @@ namespace MinimalMvvm.ViewModels
         }
         
         public event PropertyChangedEventHandler? PropertyChanged;
+        
+        /// <summary>
+        /// This event used for Reactive patterns.
+        /// </summary>
+        public event EventHandler<PropertyChangedEventArgs>? RxPropertyChanged; 
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            var args = new PropertyChangedEventArgs(propertyName);
+            PropertyChanged?.Invoke(this, args);
+            RxPropertyChanged?.Invoke(this, args);
         }
 
         internal void RaisePropertyChangedInternal([CallerMemberName] string? propertyName = null) =>
